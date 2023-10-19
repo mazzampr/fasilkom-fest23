@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\dashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,9 @@ Auth::routes();
 Route::get('/home', function () {
     return view('layouts.master');
 });
+
+Route::prefix('admin')
+    // ->middleware('auth', 'admin')
+    ->group(function () {
+        Route::get('/', [dashboardController::class, 'index'])->name('admin.index');
+    });
